@@ -1,0 +1,6 @@
+name: BetonQuestObjectiveCounter
+version: '${project.version}'
+main: me.recoko.betonquestobjectivecounter.BetonQuestObjectiveCounter
+api-version: '1.20'
+depend:
+  - BetonQuest
