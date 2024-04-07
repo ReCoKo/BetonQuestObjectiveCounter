@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BetonQuestObjectiveCounter.iml" filepath="$PROJECT_DIR$/BetonQuestObjectiveCounter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BetonQuestThings.iml" filepath="$PROJECT_DIR$/BetonQuestThings.iml" />
     </modules>
   </component>
 </project>

@@ -1,2 +1,4 @@
-me\recoko\betonquestobjectivecounter\ObjectiveCounter.class
-me\recoko\betonquestobjectivecounter\BetonQuestObjectiveCounter.class
+me\recoko\betonquestthings\BetonQuestThings.class
+me\recoko\betonquestthings\MythicMobsBridge.class
+me\recoko\betonquestthings\MythicMobsBridge$BetonItemsDrop.class
+me\recoko\betonquestthings\ObjectiveCounter.class

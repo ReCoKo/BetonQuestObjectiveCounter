@@ -1,6 +1,8 @@
-name: BetonQuestObjectiveCounter
+name: BetonQuestThings
 version: '1.0-SNAPSHOT'
-main: me.recoko.betonquestobjectivecounter.BetonQuestObjectiveCounter
+main: me.recoko.betonquestthings.BetonQuestThings
 api-version: '1.20'
 depend:
   - BetonQuest
+softdepend:
+  - MythicMobs

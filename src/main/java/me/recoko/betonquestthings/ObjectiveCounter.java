@@ -1,31 +1,18 @@
-package me.recoko.betonquestobjectivecounter;
+package me.recoko.betonquestthings;
 
 import org.betonquest.betonquest.BetonQuest;
 import org.betonquest.betonquest.Instruction;
-import org.betonquest.betonquest.VariableNumber;
 import org.betonquest.betonquest.api.Objective;
 import org.betonquest.betonquest.api.PlayerObjectiveChangeEvent;
 import org.betonquest.betonquest.api.logger.BetonQuestLogger;
 import org.betonquest.betonquest.api.profiles.Profile;
 import org.betonquest.betonquest.exceptions.InstructionParseException;
 import org.betonquest.betonquest.exceptions.ObjectNotFoundException;
-import org.betonquest.betonquest.exceptions.QuestRuntimeException;
 import org.betonquest.betonquest.id.ObjectiveID;
-import org.betonquest.betonquest.utils.PlayerConverter;
-import org.betonquest.betonquest.utils.location.CompoundLocation;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.vehicle.VehicleMoveEvent;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.logging.Level;
 
 public class ObjectiveCounter extends Objective implements Listener {
     private final BetonQuestLogger log = BetonQuest.getInstance().getLoggerFactory().create(this.getClass());
@@ -57,11 +44,11 @@ public class ObjectiveCounter extends Objective implements Listener {
                 if(current >= max) {
 
                     this.completeObjective(e.getProfile());
+                    current = 0;
                 }
             }
         }
     }
-
     public void start() {
         Bukkit.getPluginManager().registerEvents(this, BetonQuest.getInstance());
     }
