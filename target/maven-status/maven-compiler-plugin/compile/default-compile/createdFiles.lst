@@ -1,4 +1,8 @@
-me\recoko\betonquestthings\BetonQuestThings.class
 me\recoko\betonquestthings\MythicMobsBridge.class
+me\recoko\betonquestthings\questbook\DefaultRecipeRemover.class
+me\recoko\betonquestthings\questbook\QuestBookAddEvent.class
+me\recoko\betonquestthings\questbook\QuestBookAddEventFactory.class
+me\recoko\betonquestthings\BetonQuestThings.class
 me\recoko\betonquestthings\MythicMobsBridge$BetonItemsDrop.class
+me\recoko\betonquestthings\questbook\QuestbookHandler.class
 me\recoko\betonquestthings\ObjectiveCounter.class

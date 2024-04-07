@@ -2,9 +2,8 @@ package me.recoko.betonquestthings;
 
 import org.betonquest.betonquest.BetonQuest;
 import org.betonquest.betonquest.Instruction;
-import org.betonquest.betonquest.api.Objective;
+import org.betonquest.betonquest.api.CountingObjective;
 import org.betonquest.betonquest.api.PlayerObjectiveChangeEvent;
-import org.betonquest.betonquest.api.logger.BetonQuestLogger;
 import org.betonquest.betonquest.api.profiles.Profile;
 import org.betonquest.betonquest.exceptions.InstructionParseException;
 import org.betonquest.betonquest.exceptions.ObjectNotFoundException;
@@ -14,40 +13,33 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 
-public class ObjectiveCounter extends Objective implements Listener {
-    private final BetonQuestLogger log = BetonQuest.getInstance().getLoggerFactory().create(this.getClass());
-    private ObjectiveID oID;
-    private int max;
-    private int current;
+public class ObjectiveCounter extends CountingObjective implements Listener {
+    private final ObjectiveID oID;
 
     public ObjectiveCounter(Instruction instruction) throws InstructionParseException{
         super(instruction);
-        this.template = Objective.ObjectiveData.class;
+        this.template = CountingObjective.CountingData.class;
         try {
             this.oID = new ObjectiveID(instruction.getPackage(), instruction.next());
-            this.max = Integer.parseInt(instruction.next());
+            this.targetAmount = instruction.getVarNum();
         } catch(ObjectNotFoundException e){
             throw new InstructionParseException("Error while parsing: " + e.getMessage(), e);
         }
 
-        this.current = 0;
+
     }
 
     @EventHandler
-    public void changeEvent(PlayerObjectiveChangeEvent e){
+    public void changeEvent(PlayerObjectiveChangeEvent e) {
+        if (this.containsPlayer(e.getProfile()) &&
+        e.getObjective() == BetonQuest.getInstance().getObjective(oID) &&
+        e.getState() == ObjectiveState.COMPLETED){
 
-        if(e.getObjective() == BetonQuest.getInstance().getObjective(oID)){
+            this.getCountingData(e.getProfile()).add(1);
+            this.completeIfDoneOrNotify(e.getProfile());
 
-            if(e.getState() == ObjectiveState.COMPLETED){
-
-                current++;
-                if(current >= max) {
-
-                    this.completeObjective(e.getProfile());
-                    current = 0;
-                }
-            }
         }
+
     }
     public void start() {
         Bukkit.getPluginManager().registerEvents(this, BetonQuest.getInstance());
@@ -57,11 +49,9 @@ public class ObjectiveCounter extends Objective implements Listener {
         HandlerList.unregisterAll(this);
     }
 
-    public String getDefaultDataInstruction() {
-        return "";
-    }
-
     public String getProperty(String name, Profile profile) {
         return null;
     }
+
+
 }

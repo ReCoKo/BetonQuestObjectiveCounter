@@ -2,6 +2,9 @@ package me.recoko.betonquestthings;
 
 import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.core.logging.MythicLogger;
+import me.recoko.betonquestthings.questbook.QuestBookAddEvent;
+import me.recoko.betonquestthings.questbook.QuestBookAddEventFactory;
+import me.recoko.betonquestthings.questbook.QuestbookHandler;
 import org.betonquest.betonquest.BetonQuest;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -13,6 +16,8 @@ public final class BetonQuestThings extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         BetonQuest.getInstance().registerObjectives("objective", ObjectiveCounter.class);
+        BetonQuest.getInstance().registerNonStaticEvent("questbook", new QuestBookAddEventFactory());
+        Bukkit.getPluginManager().registerEvents(new QuestbookHandler(), this);
         instance = this;
         if(this.getServer().getPluginManager().isPluginEnabled("MythicMobs")) {
             this.registerCompatibility("BetonQuest", () -> {
